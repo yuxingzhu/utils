@@ -118,3 +118,15 @@ export function getBrowserType() {
     return 'Safari';
   }
 }
+
+// 数值百分比显示 
+export function toPercent (money, num) {
+  money = parseFloat(money + '') + '%';
+  return money;
+}
+
+// 数字金额转汉字金额
+export function moneyToUpper(money) {
+  // 汉字的数字
+  var cnNums = ['零', '壹', '贰', '叁', '肆', '']
+}
