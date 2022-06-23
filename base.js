@@ -128,5 +128,20 @@ export function toPercent (money, num) {
 // 数字金额转汉字金额
 export function moneyToUpper(money) {
   // 汉字的数字
-  var cnNums = ['零', '壹', '贰', '叁', '肆', '']
+  var cnNums = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
+  // 基本单位
+  var cnIntRadice = ['', '拾', '佰', '仟'];
+  // 对应整数部分扩展单位
+  var cnIntUnits = ['', '万', '亿', '兆'];
+  // 对应小数部分单位
+  var cnDecUnits = ['角', '分', '毫', '厘'];
+  
+  // 整数金额时后面跟的字符
+  var cnInteger = '整';
+  
+  // 整型完以后的单位
+  var cnIntLast = '元';
+  
+  
+  
 }
