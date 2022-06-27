@@ -120,7 +120,7 @@ export function getBrowserType() {
 }
 
 // 数值百分比显示 
-export function toPercent (money, num) {
+export function toPercent (money) {
   money = parseFloat(money + '') + '%';
   return money;
 }
