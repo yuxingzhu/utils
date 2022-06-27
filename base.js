@@ -220,3 +220,76 @@ export function moneyToUpper(money) {
   }
   return chineseStr;
 }
+
+// 汉字金额转数字金额
+export function upperToMoney(upper) {
+  /*
+  * 参数说明：
+  * upper：要转化的汉字
+  */
+  // 金额数值
+  const num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  // 汉字的数字
+  const cnNums = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
+  // 对应单位的乘积
+  const upperMap = [10, 100, 1000];
+  // 基本单位
+  const cnIntRadice = ['拾', '佰', '仟'];
+  // 对应整数部分扩展单位
+  // var cnIntUnits = ['万', '亿', '兆'];
+  // 对应小数部分单位
+  const cnDecUnits = ['角', '分'];
+  // 金融单位亿之前的数值数组
+  let maxArray = [];
+  // 金融单位亿和万之间的数值数组
+  let middleArray = [];
+  // 金融单位万和元之间的数值数组
+  let minArray = [];
+  
+  const part = upper.split('元');
+  // 金融整数部分
+  const integerNum = part[0];
+  // 金融小数部分
+  const decimalNum = part[1].split('');
+  if (integerNum.indexOf('亿') !== -1) {
+    maxArray = integerNum.split('亿')[0].split('');
+    if (integerNum.indexOf('万') !== -1) {
+      middleArray = integerNum.split('亿')[1].split('万')[0].split('');
+      minArray = integerNum.split('亿')[1].split('万')[1].split('');
+    } else {
+      minArray = integerNum.split('亿')[1].split('');
+    }
+  } else if(integerNum.indexOf('万') !== -1) {
+    middleArray = integerNum.split('万')[0].split('');
+    minArray = integerNum.split('万')[1].split('');
+  } else {
+    miniArray = integerNum.split('');
+  } 
+  const getNum = function(upArray, cnNums, cnRadice, numArray, map) {
+     const length = upArray.length;
+     let num = 0;
+     let sum = 0;
+     for(let i = 0; i < length; i++) {
+       const index = cnNums.indexOf(upArray[i]);
+       const _index = cnRadice.indexOf(upArray[i]);
+       if(index !== -1) {
+         num += numArray[index];
+         if(i === (length - 1)) {
+           sum += num;
+         }
+       }
+       if(_index !== -1) {
+         num *= map[_index];
+         sum += num;
+         num = 0;
+       }
+     } 
+     return sum;
+  }
+  const maxSum = getNum(maxArray, cnNums, cnIntRadice, num, upperMap);
+  const middleSun = getNum(middleArray, cnNums, cnIntRadice, num, upperMap);
+  const minSun = getNum(minArray, cnNums, cnIntRadice, num, upperMap);
+  const cesSum = getNum(decimalNum, cnNums, cnDecUnits, num, cnDecMap);
+  // 输出的数字金额字符串
+  return (maxSum * 100000000) + (middleSun * 10000) + minSun + cesSum;
+}
