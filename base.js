@@ -201,7 +201,7 @@ export function moneyToUpper(money) {
         chineseStr += cnIntUnits[q];
       }
     }
-    chineseStr += cnIntUnits[q];
+    chineseStr += cnIntLast;
   }
   // 小数部分
   if (decimalNum !== '') {
