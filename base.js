@@ -237,6 +237,8 @@ export function upperToMoney(upper) {
   const cnIntRadice = ['拾', '佰', '仟'];
   // 对应整数部分扩展单位
   // var cnIntUnits = ['万', '亿', '兆'];
+  // 对应小数部分单位乘积
+  const cnDecMap = [0.1, 0.01];
   // 对应小数部分单位
   const cnDecUnits = ['角', '分'];
   // 金融单位亿之前的数值数组
